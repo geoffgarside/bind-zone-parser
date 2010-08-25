@@ -1,5 +1,6 @@
 module Bind
   class Zone
+    attr_reader :records
     def self.load_file(path)
       new(File.read(path))
     end

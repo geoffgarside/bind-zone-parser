@@ -1,0 +1,21 @@
+; Zone database file for example.com zone
+
+@		86400	IN SOA	ns1.example.com. hostmaster (
+					 2010080201    ; Serial number
+					 3600          ; Refresh
+					 900           ; Retry
+					 604800        ; Expire
+					 14400       ) ; Minimum TTL
+			NS	ns1.example.com.
+			NS	ns2.example.com.
+			A	172.16.147.66
+			MX	100 mx1.example-mail.com.
+			MX	200 mx2.example-mail.com.
+			TXT	"v=spf1 a mx ip4:192.168.1.75 ?all"
+www			A	172.16.147.66
+sso			A	172.16.169.185
+jabber			A	172.16.157.212
+_jabber._tcp		SRV	10 10  5269 jabber ; Jabber Server
+_xmpp-client._tcp	SRV	10 10  5222 jabber ; Jabber Server
+_xmpp-server._tcp	SRV	10 10  5269 jabber ; Jabber Server
+xmpp			CNAME	jabber
