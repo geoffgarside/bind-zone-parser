@@ -39,12 +39,12 @@ rescue LoadError
   end
 end
 
-task :build => ['lib/bind-zone-parser.rb']
-task :test => [:check_dependencies, 'lib/bind-zone-parser.rb']
+task :build => ['lib/bind/zone_parser.rb']
+task :test => [:check_dependencies, 'lib/bind/zone_parser.rb']
 task :default => :test
 
-file 'lib/bind-zone-parser.rb' => ['lib/bind-zone-parser.rl'] do
-  sh 'ragel -R -o lib/bind-zone-parser.rb lib/bind-zone-parser.rl'
+file 'lib/bind/zone_parser.rb' => ['lib/bind/zone_parser.rl'] do
+  sh 'ragel -R -o lib/bind/zone_parser.rb lib/bind/zone_parser.rl'
 end
 
 begin

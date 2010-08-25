@@ -35,7 +35,7 @@
   sp           = space+;
   newline      = "\n";
   comment      = space* ";" [^\n]* newline;
-  endofline    = comment | newline @{ @records << record; record = Hash.new };
+  endofline    = comment | newline @{ records << record; record = Hash.new };
 
   escapes      = ('\\' [^0-9\n]) | ('\\' digit{3});
   quotedstr    = ('"' ([^"\n\\]|escapes)* '"') >clear_str_p %store_text;
@@ -86,26 +86,22 @@
   main        := (newline | comment | record)*;
 }%%
 
-class BindZoneParser
-  def self.file(path)
-    new(File.read(path))
-  end
-  def initialize(zone = nil)
-    @zone = zone
-    @records = Array.new
-  end
-  def parse
-    parse_string(@zone)
-  end
-  def parse_string(data)
-    data = data.unpack('c*')
-    record = {}
+module Bind
+  class ZoneParser
+    def self.parse(zone)
+      new.parse(zone)
+    end
+    def parse(zone)
+      data = zone.unpack('c*')
+      records = []
+      record = {}
 
-    %% write data;
-    %% write init;
-    %% write exec;
+      %% write data;
+      %% write init;
+      %% write exec;
 
-    return true if p == pe && cs == bind_parser_first_final
-    raise "cs: #{cs} p: #{p} pe: #{pe} data[p]: #{data[p] ? data[p].chr.inspect : 'nil'}"      
+      return records if p == pe && cs == bind_parser_first_final
+      raise "cs: #{cs} p: #{p} pe: #{pe} data[p]: #{data[p] ? data[p].chr.inspect : 'nil'}"
+    end
   end
 end
