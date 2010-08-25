@@ -39,8 +39,8 @@ rescue LoadError
   end
 end
 
+task :build => ['lib/bind-zone-parser.rb']
 task :test => [:check_dependencies, 'lib/bind-zone-parser.rb']
-
 task :default => :test
 
 file 'lib/bind-zone-parser.rb' => ['lib/bind-zone-parser.rl'] do
