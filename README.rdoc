@@ -1,6 +1,22 @@
-= bind-zone-parser
+= Bind::ZoneParser
 
-Description goes here.
+Helps in parsing Bind Zone files.
+
+Currently supports the current list of record types
+
+* A
+* NS
+* MX
+* TXT
+* PTR
+* SOA
+* SRV
+* CNAME
+
+== Adding more types
+
+The parser uses the Ragel state machine generator so you must have Ragel 6.5+ installed to generate
+the ruby state machine file.
 
 == Note on Patches/Pull Requests
  
