@@ -86,7 +86,7 @@
   main        := (newline | comment | record)*;
 }%%
 
-class Bind
+class BindZoneParser
   def self.file(path)
     new(File.read(path))
   end
