@@ -87,12 +87,15 @@
 }%%
 
 class Bind
-  def initialize(content = nil)
-    @content = content && (File.exists?(content) ? File.read(content) : content)
+  def self.file(path)
+    new(File.read(path))
+  end
+  def initialize(zone = nil)
+    @zone = zone
     @records = Array.new
   end
   def parse
-    parse_string(@content)
+    parse_string(@zone)
   end
   def parse_string(data)
     data = data.unpack('c*')
