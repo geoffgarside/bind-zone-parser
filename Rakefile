@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "bind-zone-parser"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{BIND Zone file parser}
+    gem.description = %Q{Helps with parsing records and data from BIND Zone files}
     gem.email = "geoff@geoffgarside.co.uk"
     gem.homepage = "http://github.com/geoffgarside/bind-zone-parser"
     gem.authors = ["Geoff Garside"]
