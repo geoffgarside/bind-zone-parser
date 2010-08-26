@@ -16,6 +16,16 @@ class TestBindZone < Test::Unit::TestCase
         assert_equal "example.com.", @zone.origin
       end
     end
+    context "#origin=" do
+      should "append . if unqualified" do
+        @zone.origin = "example.com"
+        assert_equal "example.com.", @zone.origin
+      end
+      should "not append . if qualified" do
+        @zone.origin = "example.com."
+        assert_equal "example.com.", @zone.origin
+      end
+    end
     context "#records" do
       setup do
         @records = @zone.records

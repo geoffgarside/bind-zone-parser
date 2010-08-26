@@ -12,6 +12,10 @@ module Bind
       @origin = @parser.origin
       update_blank_owners
     end
+    def origin=(v)
+      @origin = v
+      @origin << '.' unless @origin[-1,1] == '.'
+    end
     protected
       def update_blank_owners
         last_owner = nil
