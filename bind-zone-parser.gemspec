@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bind-zone-parser}
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Geoff Garside"]
-  s.date = %q{2010-08-25}
+  s.date = %q{2010-08-26}
   s.description = %q{Helps with parsing records and data from BIND Zone files}
   s.email = %q{geoff@geoffgarside.co.uk}
   s.extra_rdoc_files = [
@@ -23,11 +23,14 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "bind-zone-parser.gemspec",
      "lib/bind-zone-parser.rb",
      "lib/bind/zone.rb",
      "lib/bind/zone_parser.rb",
      "lib/bind/zone_parser.rl",
+     "test/examples/example.com.db",
      "test/helper.rb",
+     "test/test_zone.rb",
      "test/test_zone_parser.rb"
   ]
   s.homepage = %q{http://github.com/geoffgarside/bind-zone-parser}
@@ -37,6 +40,7 @@ Gem::Specification.new do |s|
   s.summary = %q{BIND Zone file parser}
   s.test_files = [
     "test/helper.rb",
+     "test/test_zone.rb",
      "test/test_zone_parser.rb"
   ]
 
