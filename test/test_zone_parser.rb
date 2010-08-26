@@ -169,6 +169,9 @@ EOF
           @zone_parser.parse("$TTL 144000\n")
           assert_equal 144000, @zone_parser.ttl
         end
+        should "not add a record" do
+          assert @zone_parser.parse("$TTL 144000\n").empty?
+        end
       end
       context "$ORIGIN option" do
         should "parse the option" do
@@ -177,6 +180,9 @@ EOF
         should "store the result" do
           @zone_parser.parse("$ORIGIN example.com.\n")
           assert_equal "example.com.", @zone_parser.origin
+        end
+        should "not add a record" do
+          assert @zone_parser.parse("$ORIGIN example.com.\n").empty?
         end
       end
     end

@@ -32,8 +32,8 @@
   action srv            { record[:type] = :srv }
   action cname          { record[:type] = :cname }
 
-  action store_opt_ttl  { @ttl = record[:ttl] }
-  action store_opt_origin { @origin = record[:domain] }
+  action store_opt_ttl  { @ttl = record[:ttl]; record = Hash.new }
+  action store_opt_origin { @origin = record[:domain]; record = Hash.new }
 
   sp           = space+;
   newline      = "\n";
@@ -88,7 +88,7 @@
 
   opt_ttl      = "$TTL" sp ttl %store_opt_ttl;
   opt_origin   = "$ORIGIN" sp fqdname %store_opt_origin;
-  option       = (opt_ttl | opt_origin) endofline;
+  option       = (opt_ttl | opt_origin) newline;
 
   main        := (newline | comment | option | record)*;
 }%%
