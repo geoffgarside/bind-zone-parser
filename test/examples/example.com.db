@@ -1,5 +1,6 @@
 ; Zone database file for example.com zone
 
+$ORIGIN example.com.
 @		86400	IN SOA	ns1.example.com. hostmaster (
 					 2010080201    ; Serial number
 					 3600          ; Refresh
