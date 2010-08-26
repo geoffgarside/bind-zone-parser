@@ -160,5 +160,25 @@ EOF
         assert @zone_parser.parse(multiline)
       end
     end
+    context "Options" do
+      context "$TTL option" do
+        should "parse the option" do
+          assert @zone_parser.parse("$TTL 144000\n")
+        end
+        should "store the result" do
+          @zone_parser.parse("$TTL 144000\n")
+          assert_equal 144000, @zone_parser.ttl
+        end
+      end
+      context "$ORIGIN option" do
+        should "parse the option" do
+          assert @zone_parser.parse("$ORIGIN example.com.\n")
+        end
+        should "store the result" do
+          @zone_parser.parse("$ORIGIN example.com.\n")
+          assert_equal "example.com.", @zone_parser.origin
+        end
+      end
+    end
   end
 end

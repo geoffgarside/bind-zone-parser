@@ -32,6 +32,9 @@
   action srv            { record[:type] = :srv }
   action cname          { record[:type] = :cname }
 
+  action store_opt_ttl  { @ttl = record[:ttl] }
+  action store_opt_origin { @origin = record[:domain] }
+
   sp           = space+;
   newline      = "\n";
   comment      = space* ";" [^\n]* newline;
@@ -83,11 +86,17 @@
                | soa_record
                | srv_record;
 
-  main        := (newline | comment | record)*;
+  opt_ttl      = "$TTL" sp ttl %store_opt_ttl;
+  opt_origin   = "$ORIGIN" sp fqdname %store_opt_origin;
+  option       = (opt_ttl | opt_origin) endofline;
+
+  main        := (newline | comment | option | record)*;
 }%%
 
 module Bind
   class ZoneParser
+    attr_reader :ttl, :origin
+
     def self.parse(zone)
       new.parse(zone)
     end
