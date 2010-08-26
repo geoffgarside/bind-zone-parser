@@ -16,6 +16,12 @@ module Bind
       @origin = v
       @origin << '.' unless @origin[-1,1] == '.'
     end
+    def qualified_records
+      raise "Please set origin before calling this function" if @origin.nil?
+      @records.map do |record|
+        qualify_record(record.dup)
+      end
+    end
     protected
       def update_blank_owners
         last_owner = nil
@@ -23,6 +29,19 @@ module Bind
           record[:owner] = last_owner if record[:owner] == ""
           last_owner = record[:owner]
         end
+      end
+      def qualify_record(record)
+        [:owner, :target, :mbox, :domain].each do |key|
+          if record.has_key?(key)
+            record[key] = qualify_name(record[key])
+          end
+        end
+        record
+      end
+      def qualify_name(dname)
+        return if dname.nil?
+        return @origin if dname == '@'
+        "#{dname}.#{@origin}" if dname[-1,1] != '.'
       end
   end
 end

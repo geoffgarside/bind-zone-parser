@@ -37,5 +37,26 @@ class TestBindZone < Test::Unit::TestCase
         assert @records.all? { |r| r[:owner] != "" }
       end
     end
+    context "#qualified_records" do
+      setup do
+        @records = @zone.qualified_records
+        @olen = @zone.origin.length
+      end
+      should "expand all @ origins" do
+        assert @records.all? { |r| r[:owner] != "@" }
+      end
+      should "qualify all owner fields" do
+        assert @records.all? { |r| if r[:owner] then r[:owner][-@olen, @olen] == @zone.origin else true end }
+      end
+      should "qualify all target fields" do
+        assert @records.all? { |r| if r[:target] then r[:target][-@olen, @olen] == @zone.origin else true end }
+      end
+      should "qualify all mbox fields" do
+        assert @records.all? { |r| if r[:mbox] then r[:mbox][-@olen, @olen] == @zone.origin else true end }
+      end
+      should "qualify all domain fields" do
+        assert @records.all? { |r| if r[:domain] then r[:domain][-@olen, @olen] == @zone.origin else true end }
+      end
+    end
   end
 end
